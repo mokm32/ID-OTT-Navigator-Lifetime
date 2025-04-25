@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="ms">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ID OTT Navigator Lifetime - Akses tak terbatas ke berbagai platform OTT terbaik dengan harga terjangkau.">
+  <meta name="description" content="ID OTT Navigator Lifetime - Akses tak terbatas ke pelbagai platform OTT terbaik dengan harga berpatutan.">
   <title>ID OTT Navigator Lifetime</title>
   <style>
     /* Reset margin and padding */
@@ -30,7 +30,7 @@
       background-color: #3498db;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 24px;
       cursor: pointer;
       border-radius: 5px;
       font-size: 16px;
@@ -170,73 +170,77 @@
     <div class="logo">ID OTT Navigator</div>
     <nav>
       <ul>
-        <li><a href="#features">Fitur</a></li>
-        <li><a href="#pricing">Harga</a></li>
-        <li><a href="#testimonials">Testimonial</a></li>
-        <li><a href="#contact">Kontak</a></li>
+        <li><a href="#features" id="features-text">Fitur</a></li>
+        <li><a href="#pricing" id="pricing-text">Harga</a></li>
+        <li><a href="#testimonials" id="testimonials-text">Testimoni</a></li>
+        <li><a href="#contact" id="contact-text">Hubungi</a></li>
       </ul>
     </nav>
-    <button class="cta" onclick="scrollToSection('#pricing')">Dapatkan Sekarang</button>
+    <div class="language-switcher">
+      <button onclick="changeLanguage('ms')">Melayu</button>
+      <button onclick="changeLanguage('en')">English</button>
+    </div>
+    <button class="cta" onclick="scrollToSection('#pricing')" id="cta-text">Dapatkan Sekarang</button>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Nikmati Akses Tak Terbatas ke Platform OTT Terbaik</h1>
-      <p>Dengan ID OTT Navigator Lifetime, nikmati pengalaman menonton tanpa batas!</p>
-      <button class="cta" onclick="scrollToSection('#pricing')">Beli Sekarang</button>
+      <h1 id="hero-title">Nikmati Akses Tak Terbatas ke Platform OTT Terbaik</h1>
+      <p id="hero-description">Dengan ID OTT Navigator Lifetime, nikmati pengalaman menonton tanpa batas!</p>
+      <button class="cta" onclick="scrollToSection('#pricing')" id="cta-text-hero">Beli Sekarang</button>
     </div>
   </section>
 
   <!-- Features Section -->
   <section id="features" class="features">
-    <h2>Kenapa Memilih ID OTT Navigator?</h2>
+    <h2 id="features-title">Kenapa Memilih ID OTT Navigator?</h2>
     <div class="feature-item">
-      <h3>Akses Seumur Hidup</h3>
-      <p>Nikmati akses tanpa batas ke berbagai platform OTT terkenal.</p>
+      <h3 id="feature-1-title">Akses Seumur Hidup</h3>
+      <p id="feature-1-description">Nikmati akses tanpa batas ke pelbagai platform OTT terkenal.</p>
     </div>
     <div class="feature-item">
-      <h3>Mudah Digunakan</h3>
-      <p>Antarmuka yang sederhana dan mudah digunakan untuk semua kalangan.</p>
+      <h3 id="feature-2-title">Mudah Digunakan</h3>
+      <p id="feature-2-description">Antaramuka yang mudah dan mesra pengguna.</p>
     </div>
     <div class="feature-item">
-      <h3>Pembaharuan Berkala</h3>
-      <p>Setiap pembaruan memastikan Anda tetap up-to-date dengan platform OTT terbaru.</p>
+      <h3 id="feature-3-title">Pembaharuan Berkala</h3>
+      <p id="feature-3-description">Sentiasa dikemas kini untuk memastikan anda kekal terkini.</p>
     </div>
     <div class="feature-item">
-      <h3>Dukungan Pelanggan 24/7</h3>
-      <p>Tim kami siap membantu kapan saja Anda membutuhkan dukungan.</p>
+      <h3 id="feature-4-title">Dukungan Pelanggan 24/7</h3>
+      <p id="feature-4-description">Pasukan kami sentiasa bersedia membantu.</p>
     </div>
   </section>
 
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
-    <h2>Apa Kata Pengguna Kami?</h2>
+    <h2 id="testimonials-title">Apa Kata Pengguna Kami?</h2>
     <div class="testimonial">
-      <p>"ID OTT Navigator mengubah cara saya menikmati konten! Sangat mudah digunakan dan aksesnya luar biasa!"</p>
-      <p><strong>Andi, Jakarta</strong></p>
+      <p>"ID OTT Navigator mengubah cara saya menikmati kandungan! Sangat mudah digunakan dan aksesnya luar biasa!"</p>
+      <p><strong>Andi, Kuala Lumpur</strong></p>
     </div>
     <div class="testimonial">
-      <p>"Harga yang terjangkau untuk akses seumur hidup, sangat puas!"</p>
-      <p><strong>Siti, Bandung</strong></p>
+      <p>"Harga yang berpatutan untuk akses seumur hidup, sangat berpuas hati!"</p>
+      <p><strong>Siti, Johor Bahru</strong></p>
     </div>
   </section>
 
   <!-- Pricing Section -->
   <section id="pricing" class="pricing">
-    <h2>Harga Terjangkau untuk Akses Seumur Hidup</h2>
-    <p>Mulai hanya dengan <strong>Rp 199.000</strong> untuk akses seumur hidup.</p>
-    <button class="cta" onclick="location.href='https://linktobuy.com'">Beli Sekarang</button>
+    <h2 id="pricing-title">Harga Berpatutan untuk Akses Seumur Hidup</h2>
+    <p id="pricing-description">Dapatkan hanya dengan <strong>RM 199.00</strong> untuk akses seumur hidup.</p>
+    <button class="cta" onclick="location.href='https://linktobuy.com'" id="cta-text-pricing">Beli Sekarang</button>
   </section>
 
   <!-- Footer Section -->
   <footer id="contact" class="footer">
     <div class="footer-links">
-      <a href="#">Home</a>
-      <a href="#">Fitur</a>
-      <a href="#">Harga</a>
-      <a href="#">Testimonial</a>
-      <a href="#">Kontak</a>
+      <a href="#" id="home-text">Home</a>
+      <a href="#features" id="features-link">Fitur</a>
+      <a href="#pricing" id="pricing-link">Harga</a>
+      <a href="#testimonials" id="testimonials-link">Testimoni</a>
+      <a href="#contact" id="contact-link">Hubungi</a>
     </div>
     <p>© 2025 ID OTT Navigator. Semua hak dilindungi.</p>
   </footer>
@@ -249,6 +253,64 @@
         top: section.offsetTop - 60,
         behavior: 'smooth'
       });
+    }
+
+    // Function to change language
+    function changeLanguage(lang) {
+      const textElements = {
+        'ms': {
+          'hero-title': 'Nikmati Akses Tak Terbatas ke Platform OTT Terbaik',
+          'hero-description': 'Dengan ID OTT Navigator Lifetime, nikmati pengalaman menonton tanpa batas!',
+          'cta-text': 'Dapatkan Sekarang',
+          'cta-text-hero': 'Beli Sekarang',
+          'features-title': 'Kenapa Memilih ID OTT Navigator?',
+          'feature-1-title': 'Akses Seumur Hidup',
+          'feature-1-description': 'Nikmati akses tanpa batas ke pelbagai platform OTT terkenal.',
+          'feature-2-title': 'Mudah Digunakan',
+          'feature-2-description': 'Antaramuka yang mudah dan mesra pengguna.',
+          'feature-3-title': 'Pembaharuan Berkala',
+          'feature-3-description': 'Sentiasa dikemas kini untuk memastikan anda kekal terkini.',
+          'feature-4-title': 'Dukungan Pelanggan 24/7',
+          'feature-4-description': 'Pasukan kami sentiasa bersedia membantu.',
+          'testimonials-title': 'Apa Kata Pengguna Kami?',
+          'pricing-title': 'Harga Berpatutan untuk Akses Seumur Hidup',
+          'pricing-description': 'Dapatkan hanya dengan RM 199.00 untuk akses seumur hidup.',
+          'home-text': 'Home',
+          'features-link': 'Fitur',
+          'pricing-link': 'Harga',
+          'testimonials-link': 'Testimoni',
+          'contact-link': 'Hubungi'
+        },
+        'en': {
+          'hero-title': 'Enjoy Unlimited Access to the Best OTT Platforms',
+          'hero-description': 'With ID OTT Navigator Lifetime, enjoy an unlimited streaming experience!',
+          'cta-text': 'Get Now',
+          'cta-text-hero': 'Buy Now',
+          'features-title': 'Why Choose ID OTT Navigator?',
+          'feature-1-title': 'Lifetime Access',
+          'feature-1-description': 'Enjoy unlimited access to top OTT platforms.',
+          'feature-2-title': 'Easy to Use',
+          'feature-2-description': 'User-friendly interface for all audiences.',
+          'feature-3-title': 'Regular Updates',
+          'feature-3-description': 'Always updated to ensure you stay current.',
+          'feature-4-title': '24/7 Support',
+          'feature-4-description': 'Our team is always ready to help.',
+          'testimonials-title': 'What Our Users Say?',
+          'pricing-title': 'Affordable Lifetime Access',
+          'pricing-description': 'Get it for just RM 199.00 for lifetime access.',
+          'home-text': 'Home',
+          'features-link': 'Features',
+          'pricing-link': 'Pricing',
+          'testimonials-link': 'Testimonials',
+          'contact-link': 'Contact'
+        }
+      };
+
+      const texts = textElements[lang];
+
+      for (const [key, value] of Object.entries(texts)) {
+        document.getElementById(key).innerText = value;
+      }
     }
   </script>
 </body>
