@@ -421,7 +421,7 @@
         <img src="https://i.ibb.co/Q3WwWSsq/Screenshot-2025-04-25-23-40-18.png" alt="Screenshot 22">
         <img src="https://i.ibb.co/RGQYp137/Screenshot-2025-04-25-23-40-26.png" alt="Screenshot 23">
         <img src="https://i.ibb.co/Zph18xs4/Screenshot-2025-04-25-23-40-32.png" alt="Screenshot 24">
-        <img src="https://i.ibb.co/rRhN8Dnf/Screenshot-2025-04-25-23-40-44.png" alt="Screenshot 25">
+        <img src="https://i.ibb.co/rRhN8Dnf/Screenshot-2025-04-25-23-40-44Released on: 04-25-23-40-44.png" alt="Screenshot 25">
         <img src="https://i.ibb.co/QjccdrjY/Screenshot-2025-04-25-23-40-51.png" alt="Screenshot 26">
         <img src="https://i.ibb.co/zVtcLP6B/Screenshot-2025-04-25-23-41-00.png" alt="Screenshot 27">
         <img src="https://i.ibb.co/zHFYDqqx/Screenshot-2025-04-25-23-41-05.png" alt="Screenshot 28">
@@ -431,7 +431,7 @@
         <img src="https://i.ibb.co/mFtn98Wf/Screenshot-2025-04-25-23-41-41.png" alt="Screenshot 32">
         <img src="https://i.ibb.co/wh7mg0B9/Screenshot-2025-04-25-23-41-49.png" alt="Screenshot 33">
         <img src="https://i.ibb.co/8L8JBjv6/Screenshot-2025-04-25-23-41-55.png" alt="Screenshot 34">
-        <img src="https://i.ibb.co/C5rdqncj/Screenshot-2025-04-25-23-42-01.png" alt="Screenshot 35">
+        <img src="https://i.ibb.co/C5rdqncj/Screenshot-2025-04 SMALL-25-23-42-01.png" alt="Screenshot 35">
         <img src="https://i.ibb.co/0pQ0q4j5/Screenshot-2025-04-25-23-42-07.png" alt="Screenshot 36">
       </div>
     </div>
@@ -514,7 +514,7 @@
 
   <script>
     // Initialize Stripe with your publishable key
-    const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'); // Replace with your actual Stripe publishable key
+    const stripe = Stripe('pk_test_YOUR_STRIPE_PUBLISHABLE_KEY'); // Replace with your actual Stripe publishable key
 
     // Function to smoothly scroll to a section
     function scrollToSection(sectionId) {
@@ -555,35 +555,35 @@
       if (paymentMethod === 'fpx') {
         // Handle FPX payment with Stripe
         try {
-          // Create a Stripe Checkout Session
-          const response = await fetch('/create-checkout-session', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              package: package,
-              amount: amount, // Amount in smallest currency unit (sen)
-              email: email,
+          const session = await stripe.redirectToCheckout({
+            lineItems: [{
+              price_data: {
+                currency: 'myr',
+                product_data: {
+                  name: package,
+                },
+                unit_amount: amount,
+              },
+              quantity: 1,
+            }],
+            mode: 'payment',
+            successUrl: window.location.origin + '/success.html',
+            cancelUrl: window.location.origin + '/cancel.html',
+            customerEmail: email,
+            paymentMethodTypes: ['fpx'],
+            billingAddressCollection: 'required',
+            metadata: {
               fullName: fullName,
-              success_url: window.location.origin + '/success.html',
-              cancel_url: window.location.origin + '/cancel.html',
-            }),
+              package: package,
+            },
           });
 
-          const session = await response.json();
-
-          // Redirect to Stripe Checkout
-          const { error } = await stripe.redirectToCheckout({
-            sessionId: session.id,
-          });
-
-          if (error) {
-            console.error('Stripe Checkout error:', error.message);
+          if (session.error) {
+            console.error('Stripe Checkout error:', session.error.message);
             alert('Ralat semasa memproses pembayaran FPX. Sila cuba lagi.');
           }
         } catch (error) {
-          console.error('Error creating checkout session:', error);
+          console.error('Error redirecting to checkout:', error);
           alert('Ralat semasa memproses pembayaran FPX. Sila cuba lagi.');
         }
       } else {
@@ -696,9 +696,9 @@
 
       for (const [key, value] of Object.entries(texts)) {
         const element = document.getElementById(key);
-        if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
+        if (element && (element.tagName === 'INPUT' || element.tagName === 'SELECT')) {
           element.placeholder = value;
-        } else {
+        } else if (element) {
           element.innerText = value;
         }
       }
