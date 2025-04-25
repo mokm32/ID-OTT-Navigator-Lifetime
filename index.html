@@ -45,6 +45,7 @@
       color: white;
       padding: 20px;
       text-align: center;
+      position: relative;
     }
 
     header .logo {
@@ -52,13 +53,18 @@
       font-weight: bold;
     }
 
+    nav {
+      margin: 10px 0;
+    }
+
     nav ul {
       list-style: none;
       padding: 0;
+      display: flex;
+      justify-content: center;
     }
 
     nav ul li {
-      display: inline;
       margin: 0 10px;
     }
 
@@ -83,7 +89,6 @@
       text-align: center;
     }
 
-    /* Adding overlay to the hero section */
     .hero::before {
       content: '';
       position: absolute;
@@ -91,12 +96,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4); /* Dark overlay for better text contrast */
+      background: rgba(0, 0, 0, 0.4);
     }
 
     .hero-content {
       position: relative;
-      z-index: 1; /* Ensures text appears above the overlay */
+      z-index: 1;
     }
 
     .hero-content h1 {
@@ -122,11 +127,12 @@
     .feature-item {
       display: inline-block;
       width: 22%;
-      margin: 0 10px;
+      margin: 10px;
       background-color: white;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      vertical-align: top;
     }
 
     .feature-item h3 {
@@ -166,12 +172,13 @@
     .package-item {
       display: inline-block;
       width: 22%;
-      margin: 0 10px;
+      margin: 10px;
       background-color: white;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
+      vertical-align: top;
     }
 
     .package-item h3 {
@@ -211,6 +218,9 @@
     /* Language Switcher Styling */
     .language-switcher {
       margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
 
     .language-switcher button {
@@ -309,7 +319,7 @@
 
     .carousel {
       display: flex;
-      transition: transform 0.5s ease-in-out;
+      transition: transform  Ascynartion: transform 0.5s ease-in-out;
     }
 
     .carousel img {
@@ -408,13 +418,215 @@
     .chatbot-option:hover {
       background-color: #dfe6e9;
     }
+
+    /* Hamburger Menu Styling */
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      /* Header */
+      header .logo {
+        font-size: 20px;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #2c3e50;
+        padding: 20px;
+        z-index: 1000;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      nav ul li a {
+        font-size: 16px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .language-switcher {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .language-switcher button {
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+
+      .cta {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 28px;
+      }
+
+      .hero-content p {
+        font-size: 16px;
+      }
+
+      /* Features */
+      .features {
+        padding: 40px 20px;
+      }
+
+      .features h2 {
+        font-size: 28px;
+      }
+
+      .feature-item {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .feature-item h3 {
+        font-size: 20px;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        padding: 40px 20px;
+      }
+
+      .testimonials h2 {
+        font-size: 28px;
+      }
+
+      .carousel img {
+        max-width: 100%;
+        margin: 0;
+      }
+
+      /* Packages */
+      .packages {
+        padding: 40px 20px;
+      }
+
+      .packages h2 {
+        font-size: 28px;
+      }
+
+      .package-item {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .package-item h3 {
+        font-size: 20px;
+      }
+
+      .package-item .price {
+        font-size: 20px;
+      }
+
+      /* Modal */
+      .modal-content {
+        padding: 20px;
+        width: 95%;
+      }
+
+      .modal-content h2 {
+        font-size: 20px;
+      }
+
+      .modal-content label {
+        font-size: 14px;
+      }
+
+      .modal-content input,
+      .modal-content select {
+        font-size: 14px;
+        padding: 8px;
+      }
+
+      .modal-content button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      /* Chatbot */
+      .chatbot {
+        width: 90%;
+        max-height: 400px;
+      }
+
+      .chatbot-header {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      .chatbot-body {
+        padding: 10px;
+        max-height: 300px;
+      }
+
+      .chatbot-message {
+        font-size: 14px;
+      }
+
+      .chatbot-option {
+        font-size: 14px;
+        padding: 8px;
+      }
+
+      .chatbot-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 15px;
+      }
+
+      .footer a {
+        font-size: 14px;
+        margin: 0 5px;
+      }
+
+      .footer p {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">ID OTT Navigator</div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
     <nav>
-      <ul>
+      <ul id="nav-menu">
         <li><a href="#features" id="features-text">Fitur</a></li>
         <li><a href="#packages" id="pricing-text">Pakej</a></li>
         <li><a href="#testimonials" id="testimonials-text">Testimoni</a></li>
@@ -596,6 +808,12 @@
   </footer>
 
   <script>
+    // Function to toggle hamburger menu
+    function toggleMenu() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('active');
+    }
+
     // Function to smoothly scroll to a section
     function scrollToSection(sectionId) {
       const section = document.querySelector(sectionId);
@@ -603,6 +821,10 @@
         top: section.offsetTop - 60,
         behavior: 'smooth'
       });
+      // Close menu on mobile after clicking
+      if (window.innerWidth <= 768) {
+        toggleMenu();
+      }
     }
 
     // Function to open booking form modal
@@ -757,14 +979,15 @@
     function slideCarousel() {
       currentIndex++;
       if (currentIndex >= totalImages) {
-        currentIndex = 0; // Loop back to the start
-        carousel.style.transition = 'none'; // Disable transition for instant reset
+        currentIndex = 0;
+        carousel.style.transition = 'none';
         carousel.style.transform = `translateX(0px)`;
         setTimeout(() => {
-          carousel.style.transition = 'transform 0.5s ease-in-out'; // Re-enable transition
+          carousel.style.transition = 'transform 0.5s ease-in-out';
         }, 50);
       } else {
-        carousel.style.transform = `translateX(-${currentIndex * (620)}px)`; // 620px = image width (600px) + margin (20px)
+        const offset = window.innerWidth <= 768 ? window.innerWidth : 620;
+        carousel.style.transform = `translateX(-${currentIndex * offset}px)`;
       }
     }
 
@@ -779,7 +1002,7 @@
       },
       2: {
         question: "Kelajuan internet yang diperlukan berapa Mbps?",
-        answer: "3 Mbps dan ke atas boleh guna"
+        answer: "3 Mbps dan ke atas boleh g Continent
       },
       3: {
         question: "Channel apa saja yang ada?",
@@ -821,7 +1044,7 @@
       const chatbot = document.getElementById('chatbot');
       chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
       if (chatbot.style.display === 'block') {
-        resetChatbot(); // Reset chatbot when opened
+        resetChatbot();
       }
     }
 
@@ -842,33 +1065,28 @@
           <div class="chatbot-option" onclick="selectOption(10)">10. Jika channel tidak boleh dibuka, apa yang perlu dilakukan?</div>
         </div>
       `;
-      chatbotBody.scrollTop = 0; // Scroll to top
-      clearTimeout(resetTimeout); // Clear any existing timeout
+      chatbotBody.scrollTop = 0;
+      clearTimeout(resetTimeout);
     }
 
     function selectOption(option) {
       const chatbotBody = document.getElementById('chatbot-body');
       const data = chatbotData[option];
 
-      // Clear current content
       chatbotBody.innerHTML = '';
 
-      // Add user question
       const userMessage = document.createElement('div');
       userMessage.className = 'chatbot-message user';
       userMessage.innerText = data.question;
       chatbotBody.appendChild(userMessage);
 
-      // Add bot response
       const botMessage = document.createElement('div');
       botMessage.className = 'chatbot-message bot';
       botMessage.innerText = data.answer;
       chatbotBody.appendChild(botMessage);
 
-      // Scroll to bottom
       chatbotBody.scrollTop = chatbotBody.scrollHeight;
 
-      // Set timeout to reset chatbot after 7 seconds
       clearTimeout(resetTimeout);
       resetTimeout = setTimeout(resetChatbot, 7000);
     }
