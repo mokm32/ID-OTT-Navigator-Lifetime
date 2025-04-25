@@ -154,14 +154,42 @@
       color: #555;
     }
 
-    .pricing {
+    .packages {
       padding: 60px 20px;
       text-align: center;
     }
 
-    .pricing h2 {
+    .packages h2 {
       font-size: 36px;
       margin-bottom: 20px;
+    }
+
+    .package-item {
+      display: inline-block;
+      width: 22%;
+      margin: 0 10px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .package-item h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .package-item p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .package-item .price {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 15px;
     }
 
     .footer {
@@ -199,6 +227,78 @@
     .language-switcher button:hover {
       background-color: #2980b9;
     }
+
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .modal-content h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .modal-content .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .modal-content form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-content label {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .modal-content button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal-content button:hover {
+      background-color: #2980b9;
+    }
   </style>
 </head>
 <body>
@@ -207,7 +307,7 @@
     <nav>
       <ul>
         <li><a href="#features" id="features-text">Fitur</a></li>
-        <li><a href="#pricing" id="pricing-text">Harga</a></li>
+        <li><a href="#packages" id="pricing-text">Pakej</a></li>
         <li><a href="#testimonials" id="testimonials-text">Testimoni</a></li>
         <li><a href="#contact" id="contact-text">Hubungi</a></li>
       </ul>
@@ -216,7 +316,7 @@
       <button onclick="changeLanguage('ms')">Melayu</button>
       <button onclick="changeLanguage('en')">English</button>
     </div>
-    <button class="cta" onclick="scrollToSection('#pricing')" id="cta-text">Dapatkan Sekarang</button>
+    <button class="cta" onclick="scrollToSection('#packages')" id="cta-text">Dapatkan Sekarang</button>
   </header>
 
   <!-- Hero Section -->
@@ -224,7 +324,7 @@
     <div class="hero-content">
       <h1 id="hero-title">Nikmati Akses Tak Terbatas ke Platform OTT Terbaik</h1>
       <p id="hero-description">Dengan ID OTT Navigator Lifetime, nikmati pengalaman menonton tanpa batas!</p>
-      <button class="cta" onclick="scrollToSection('#pricing')" id="cta-text-hero">Beli Sekarang</button>
+      <button class="cta" onclick="scrollToSection('#packages')" id="cta-text-hero">Beli Sekarang</button>
     </div>
   </section>
 
@@ -262,19 +362,67 @@
     </div>
   </section>
 
-  <!-- Pricing Section -->
-  <section id="pricing" class="pricing">
-    <h2 id="pricing-title">Harga Berpatutan untuk Akses Seumur Hidup</h2>
-    <p id="pricing-description">Dapatkan hanya dengan <strong>RM 199.00</strong> untuk akses seumur hidup.</p>
-    <button class="cta" onclick="location.href='https://linktobuy.com'" id="cta-text-pricing">Beli Sekarang</button>
+  <!-- Packages Section -->
+  <section id="packages" class="packages">
+    <h2 id="pricing-title">Pilih Pakej Anda</h2>
+    <p id="pricing-description">Pilih pakej yang sesuai dengan keperluan anda untuk akses seumur hidup.</p>
+    <div class="package-item">
+      <h3>Pakej 1</h3>
+      <p>1 ID, 1 Peranti</p>
+      <div class="price">RM 10.00</div>
+      <button class="cta" onclick="openBookingForm('Pakej 1')" id="cta-text-package1">Beli Sekarang</button>
+    </div>
+    <div class="package-item">
+      <h3>Pakej 2</h3>
+      <p>1 ID, 2 Peranti (Serentak)</p>
+      <div class="price">RM 20.00</div>
+      <button class="cta" onclick="openBookingForm('Pakej 2')" id="cta-text-package2">Beli Sekarang</button>
+    </div>
+    <div class="package-item">
+      <h3>Pakej 3</h3>
+      <p>1 ID, 3 Peranti (Serentak)</p>
+      <div class="price">RM 30.00</div>
+      <button class="cta" onclick="openBookingForm('Pakej 3')" id="cta-text-package3">Beli Sekarang</button>
+    </div>
+    <div class="package-item">
+      <h3>Pakej 4</h3>
+      <p>1 ID, 4 Peranti (Serentak)</p>
+      <div class="price">RM 38.00</div>
+      <button class="cta" onclick="openBookingForm('Pakej 4')" id="cta-text-package4">Beli Sekarang</button>
+    </div>
   </section>
+
+  <!-- Booking Form Modal -->
+  <div id="booking-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeBookingForm()">&times;</span>
+      <h2 id="booking-form-title">Borang Tempahan</h2>
+      <form id="booking-form" onsubmit="submitBookingForm(event)">
+        <label for="full-name" id="full-name-label">Nama Penuh</label>
+        <input type="text" id="full-name" name="full-name" required>
+        
+        <label for="email" id="email-label">E-mel</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="package" id="package-label">Pakej</label>
+        <select id="package" name="package" disabled>
+          <option value="Pakej 1">Pakej 1 - 1 ID, 1 Peranti (RM 10.00)</option>
+          <option value="Pakej 2">Pakej 2 - 1 ID, 2 Peranti (RM 20.00)</option>
+          <option value="Pakej 3">Pakej 3 - 1 ID, 3 Peranti (RM 30.00)</option>
+          <option value="Pakej 4">Pakej 4 - 1 ID, 4 Peranti (RM 38.00)</option>
+        </select>
+        
+        <button type="submit" id="submit-booking">Hantar Tempahan</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Footer Section -->
   <footer id="contact" class="footer">
     <div class="footer-links">
       <a href="#" id="home-text">Home</a>
       <a href="#features" id="features-link">Fitur</a>
-      <a href="#pricing" id="pricing-link">Harga</a>
+      <a href="#packages" id="pricing-link">Pakej</a>
       <a href="#testimonials" id="testimonials-link">Testimoni</a>
       <a href="#contact" id="contact-link">Hubungi</a>
     </div>
@@ -291,6 +439,36 @@
       });
     }
 
+    // Function to open booking form modal
+    function openBookingForm(packageName) {
+      const modal = document.getElementById('booking-modal');
+      const packageSelect = document.getElementById('package');
+      packageSelect.value = packageName;
+      modal.style.display = 'flex';
+    }
+
+    // Function to close booking form modal
+    function closeBookingForm() {
+      const modal = document.getElementById('booking-modal');
+      modal.style.display = 'none';
+      document.getElementById('booking-form').reset();
+    }
+
+    // Function to handle form submission
+    function submitBookingForm(event) {
+      event.preventDefault();
+      const fullName = document.getElementById('full-name').value;
+      const email = document.getElementById('email').value;
+      const package = document.getElementById('package').value;
+
+      // For demo purposes, log the form data to console
+      console.log('Booking Details:', { fullName, email, package });
+
+      // You can integrate with an API here to process the booking
+      alert('Tempahan anda telah dihantar! Kami akan menghubungi anda tidak lama lagi.');
+      closeBookingForm();
+    }
+
     // Function to change language
     function changeLanguage(lang) {
       const textElements = {
@@ -299,6 +477,10 @@
           'hero-description': 'Dengan ID OTT Navigator Lifetime, nikmati pengalaman menonton tanpa batas!',
           'cta-text': 'Dapatkan Sekarang',
           'cta-text-hero': 'Beli Sekarang',
+          'cta-text-package1': 'Beli Sekarang',
+          'cta-text-package2': 'Beli Sekarang',
+          'cta-text-package3': 'Beli Sekarang',
+          'cta-text-package4': 'Beli Sekarang',
           'features-title': 'Kenapa Memilih ID OTT Navigator?',
           'feature-1-title': 'Akses Seumur Hidup',
           'feature-1-description': 'Nikmati akses tanpa batas ke pelbagai platform OTT terkenal.',
@@ -309,19 +491,32 @@
           'feature-4-title': 'Dukungan Pelanggan 24/7',
           'feature-4-description': 'Pasukan kami sentiasa bersedia membantu.',
           'testimonials-title': 'Apa Kata Pengguna Kami?',
-          'pricing-title': 'Harga Berpatutan untuk Akses Seumur Hidup',
-          'pricing-description': 'Dapatkan hanya dengan RM 199.00 untuk akses seumur hidup.',
+          'pricing-title': 'Pilih Pakej Anda',
+          'pricing-description': 'Pilih pakej yang sesuai dengan keperluan anda untuk akses seumur hidup.',
           'home-text': 'Home',
+          'features-text': 'Fitur',
+          'pricing-text': 'Pakej',
+          'testimonials-text': 'Testimoni',
+          'contact-text': 'Hubungi',
           'features-link': 'Fitur',
-          'pricing-link': 'Harga',
+          'pricing-link': 'Pakej',
           'testimonials-link': 'Testimoni',
-          'contact-link': 'Hubungi'
+          'contact-link': 'Hubungi',
+          'booking-form-title': 'Borang Tempahan',
+          'full-name-label': 'Nama Penuh',
+          'email-label': 'E-mel',
+          'package-label': 'Pakej',
+          'submit-booking': 'Hantar Tempahan'
         },
         'en': {
           'hero-title': 'Enjoy Unlimited Access to the Best OTT Platforms',
           'hero-description': 'With ID OTT Navigator Lifetime, enjoy endless streaming experiences!',
           'cta-text': 'Get Now',
           'cta-text-hero': 'Buy Now',
+          'cta-text-package1': 'Buy Now',
+          'cta-text-package2': 'Buy Now',
+          'cta-text-package3': 'Buy Now',
+          'cta-text-package4': 'Buy Now',
           'features-title': 'Why Choose ID OTT Navigator?',
           'feature-1-title': 'Lifetime Access',
           'feature-1-description': 'Enjoy unlimited access to top OTT platforms.',
@@ -332,20 +527,34 @@
           'feature-4-title': '24/7 Support',
           'feature-4-description': 'Our team is always ready to help.',
           'testimonials-title': 'What Our Users Say?',
-          'pricing-title': 'Affordable Lifetime Access',
-          'pricing-description': 'Get it for just RM 199.00 for lifetime access.',
+          'pricing-title': 'Choose Your Package',
+          'pricing-description': 'Select the package that suits your needs for lifetime access.',
           'home-text': 'Home',
+          'features-text': 'Features',
+          'pricing-text': 'Packages',
+          'testimonials-text': 'Testimonials',
+          'contact-text': 'Contact',
           'features-link': 'Features',
-          'pricing-link': 'Pricing',
+          'pricing-link': 'Packages',
           'testimonials-link': 'Testimonials',
-          'contact-link': 'Contact'
+          'contact-link': 'Contact',
+          'booking-form-title': 'Booking Form',
+          'full-name-label': 'Full Name',
+          'email-label': 'Email',
+          'package-label': 'Package',
+          'submit-booking': 'Submit Booking'
         }
       };
 
       const texts = textElements[lang];
 
       for (const [key, value] of Object.entries(texts)) {
-        document.getElementById(key).innerText = value;
+        const element = document.getElementById(key);
+        if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
+          element.placeholder = value;
+        } else {
+          element.innerText = value;
+        }
       }
     }
   </script>
