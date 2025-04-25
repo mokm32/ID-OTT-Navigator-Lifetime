@@ -395,7 +395,7 @@
   <!-- Booking Form Modal -->
   <div id="booking-modal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeBookingForm()">&times;</span>
+      <span class="close" onclick="closeBookingForm()">×</span>
       <h2 id="booking-form-title">Borang Tempahan</h2>
       <form id="booking-form" onsubmit="submitBookingForm(event)">
         <label for="full-name" id="full-name-label">Nama Penuh</label>
@@ -460,12 +460,36 @@
       const fullName = document.getElementById('full-name').value;
       const email = document.getElementById('email').value;
       const package = document.getElementById('package').value;
+      const currentLang = document.querySelector('.language-switcher button[style*="background-color: #2980b9"]')?.innerText === 'English' ? 'en' : 'ms';
 
-      // For demo purposes, log the form data to console
-      console.log('Booking Details:', { fullName, email, package });
+      // Define message templates based on language
+      const messageTemplates = {
+        ms: {
+          header: 'Tempahan Baru:',
+          fullName: 'Nama Penuh: ',
+          email: 'E-mel: ',
+          package: 'Pakej: '
+        },
+        en: {
+          header: 'New Booking:',
+          fullName: 'Full Name: ',
+          email: 'Email: ',
+          package: 'Package: '
+        }
+      };
 
-      // You can integrate with an API here to process the booking
-      alert('Tempahan anda telah dihantar! Kami akan menghubungi anda tidak lama lagi.');
+      // Select the appropriate template
+      const template = messageTemplates[currentLang];
+
+      // Construct the WhatsApp message
+      const message = `${template.header}\n${template.fullName}${fullName}\n${template.email}${email}\n${template.package}${package}`;
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/601136237443?text=${encodedMessage}`;
+
+      // Redirect to WhatsApp
+      window.open(whatsappUrl, '_blank');
+
+      // Close the modal
       closeBookingForm();
     }
 
