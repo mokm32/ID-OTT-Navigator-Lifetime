@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ID OTT Navigator Lifetime - Akses tak terbatas ke pelbagai platform OTT terbaik dengan harga berpatutan.">
   <title>ID OTT Navigator Lifetime</title>
-  <script src="https://js.stripe.com/v3/"></script>
   <style>
     /* Reset margin and padding */
     * {
@@ -321,25 +320,6 @@
       border-radius: 10px;
       margin: 0 10px;
     }
-
-    /* FPX Payment Styling */
-    .payment-method {
-      margin-bottom: 15px;
-    }
-
-    .payment-method label {
-      font-size: 16px;
-      margin-bottom: 5px;
-      display: block;
-    }
-
-    .payment-method select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-    }
   </style>
 </head>
 <body>
@@ -421,7 +401,7 @@
         <img src="https://i.ibb.co/Q3WwWSsq/Screenshot-2025-04-25-23-40-18.png" alt="Screenshot 22">
         <img src="https://i.ibb.co/RGQYp137/Screenshot-2025-04-25-23-40-26.png" alt="Screenshot 23">
         <img src="https://i.ibb.co/Zph18xs4/Screenshot-2025-04-25-23-40-32.png" alt="Screenshot 24">
-        <img src="https://i.ibb.co/rRhN8Dnf/Screenshot-2025-04-25-23-40-44Released on: 04-25-23-40-44.png" alt="Screenshot 25">
+        <img src="https://i.ibb.co/rRhN8Dnf/Screenshot-2025-04-25-23-40-44.png" alt="Screenshot 25">
         <img src="https://i.ibb.co/QjccdrjY/Screenshot-2025-04-25-23-40-51.png" alt="Screenshot 26">
         <img src="https://i.ibb.co/zVtcLP6B/Screenshot-2025-04-25-23-41-00.png" alt="Screenshot 27">
         <img src="https://i.ibb.co/zHFYDqqx/Screenshot-2025-04-25-23-41-05.png" alt="Screenshot 28">
@@ -431,7 +411,7 @@
         <img src="https://i.ibb.co/mFtn98Wf/Screenshot-2025-04-25-23-41-41.png" alt="Screenshot 32">
         <img src="https://i.ibb.co/wh7mg0B9/Screenshot-2025-04-25-23-41-49.png" alt="Screenshot 33">
         <img src="https://i.ibb.co/8L8JBjv6/Screenshot-2025-04-25-23-41-55.png" alt="Screenshot 34">
-        <img src="https://i.ibb.co/C5rdqncj/Screenshot-2025-04 SMALL-25-23-42-01.png" alt="Screenshot 35">
+        <img src="https://i.ibb.co/C5rdqncj/Screenshot-2025-04-25-23-42-01.png" alt="Screenshot 35">
         <img src="https://i.ibb.co/0pQ0q4j5/Screenshot-2025-04-25-23-42-07.png" alt="Screenshot 36">
       </div>
     </div>
@@ -445,25 +425,25 @@
       <h3>Pakej 1</h3>
       <p>1 ID, 1 Peranti</p>
       <div class="price">RM 10.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 1', 1000)" id="cta-text-package1">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 1')" id="cta-text-package1">Beli Sekarang</button>
     </div>
     <div class="package-item">
       <h3>Pakej 2</h3>
       <p>1 ID, 2 Peranti (Serentak)</p>
       <div class="price">RM 20.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 2', 2000)" id="cta-text-package2">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 2')" id="cta-text-package2">Beli Sekarang</button>
     </div>
     <div class="package-item">
       <h3>Pakej 3</h3>
       <p>1 ID, 3 Peranti (Serentak)</p>
       <div class="price">RM 30.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 3', 3000)" id="cta-text-package3">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 3')" id="cta-text-package3">Beli Sekarang</button>
     </div>
     <div class="package-item">
       <h3>Pakej 4</h3>
       <p>1 ID, 4 Peranti (Serentak)</p>
       <div class="price">RM 38.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 4', 3800)" id="cta-text-package4">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 4')" id="cta-text-package4">Beli Sekarang</button>
     </div>
   </section>
 
@@ -487,14 +467,6 @@
           <option value="Pakej 4">Pakej 4 - 1 ID, 4 Peranti (RM 38.00)</option>
         </select>
         
-        <div class="payment-method">
-          <label for="payment-method" id="payment-method-label">Kaedah Pembayaran</label>
-          <select id="payment-method" name="payment-method" required>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="fpx">FPX (Online Banking)</option>
-          </select>
-        </div>
-        
         <button type="submit" id="submit-booking">Hantar Tempahan</button>
       </form>
     </div>
@@ -513,9 +485,6 @@
   </footer>
 
   <script>
-    // Initialize Stripe with your publishable key
-    const stripe = Stripe('pk_test_YOUR_STRIPE_PUBLISHABLE_KEY'); // Replace with your actual Stripe publishable key
-
     // Function to smoothly scroll to a section
     function scrollToSection(sectionId) {
       const section = document.querySelector(sectionId);
@@ -526,12 +495,10 @@
     }
 
     // Function to open booking form modal
-    function openBookingForm(packageName, amount) {
+    function openBookingForm(packageName) {
       const modal = document.getElementById('booking-modal');
       const packageSelect = document.getElementById('package');
       packageSelect.value = packageName;
-      // Store amount in a data attribute for later use
-      document.getElementById('booking-form').dataset.amount = amount;
       modal.style.display = 'flex';
     }
 
@@ -543,74 +510,42 @@
     }
 
     // Function to handle form submission
-    async function submitBookingForm(event) {
+    function submitBookingForm(event) {
       event.preventDefault();
       const fullName = document.getElementById('full-name').value;
       const email = document.getElementById('email').value;
       const package = document.getElementById('package').value;
-      const paymentMethod = document.getElementById('payment-method').value;
-      const amount = parseInt(document.getElementById('booking-form').dataset.amount);
       const currentLang = document.querySelector('.language-switcher button[style*="background-color: #2980b9"]')?.innerText === 'English' ? 'en' : 'ms';
 
-      if (paymentMethod === 'fpx') {
-        // Handle FPX payment with Stripe
-        try {
-          const session = await stripe.redirectToCheckout({
-            lineItems: [{
-              price_data: {
-                currency: 'myr',
-                product_data: {
-                  name: package,
-                },
-                unit_amount: amount,
-              },
-              quantity: 1,
-            }],
-            mode: 'payment',
-            successUrl: window.location.origin + '/success.html',
-            cancelUrl: window.location.origin + '/cancel.html',
-            customerEmail: email,
-            paymentMethodTypes: ['fpx'],
-            billingAddressCollection: 'required',
-            metadata: {
-              fullName: fullName,
-              package: package,
-            },
-          });
-
-          if (session.error) {
-            console.error('Stripe Checkout error:', session.error.message);
-            alert('Ralat semasa memproses pembayaran FPX. Sila cuba lagi.');
-          }
-        } catch (error) {
-          console.error('Error redirecting to checkout:', error);
-          alert('Ralat semasa memproses pembayaran FPX. Sila cuba lagi.');
+      // Define message templates based on language
+      const messageTemplates = {
+        ms: {
+          header: 'Tempahan Baru:',
+          fullName: 'Nama Penuh: ',
+          email: 'E-mel: ',
+          package: 'Pakej: '
+        },
+        en: {
+          header: 'New Booking:',
+          fullName: 'Full Name: ',
+          email: 'Email: ',
+          package: 'Package: '
         }
-      } else {
-        // Existing WhatsApp payment flow
-        const messageTemplates = {
-          ms: {
-            header: 'Tempahan Baru:',
-            fullName: 'Nama Penuh: ',
-            email: 'E-mel: ',
-            package: 'Pakej: '
-          },
-          en: {
-            header: 'New Booking:',
-            fullName: 'Full Name: ',
-            email: 'Email: ',
-            package: 'Package: '
-          }
-        };
+      };
 
-        const template = messageTemplates[currentLang];
-        const message = `${template.header}\n${template.fullName}${fullName}\n${template.email}${email}\n${template.package}${package}`;
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/601136237443?text=${encodedMessage}`;
+      // Select the appropriate template
+      const template = messageTemplates[currentLang];
 
-        window.open(whatsappUrl, '_blank');
-        closeBookingForm();
-      }
+      // Construct the WhatsApp message
+      const message = `${template.header}\n${template.fullName}${fullName}\n${template.email}${email}\n${template.package}${package}`;
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/601136237443?text=${encodedMessage}`;
+
+      // Redirect to WhatsApp
+      window.open(whatsappUrl, '_blank');
+
+      // Close the modal
+      closeBookingForm();
     }
 
     // Function to change language
@@ -650,7 +585,6 @@
           'full-name-label': 'Nama Penuh',
           'email-label': 'E-mel',
           'package-label': 'Pakej',
-          'payment-method-label': 'Kaedah Pembayaran',
           'submit-booking': 'Hantar Tempahan'
         },
         'en': {
@@ -687,7 +621,6 @@
           'full-name-label': 'Full Name',
           'email-label': 'Email',
           'package-label': 'Package',
-          'payment-method-label': 'Payment Method',
           'submit-booking': 'Submit Booking'
         }
       };
