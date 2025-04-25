@@ -815,14 +815,43 @@
       }
     };
 
+    let resetTimeout;
+
     function toggleChatbot() {
       const chatbot = document.getElementById('chatbot');
       chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
+      if (chatbot.style.display === 'block') {
+        resetChatbot(); // Reset chatbot when opened
+      }
+    }
+
+    function resetChatbot() {
+      const chatbotBody = document.getElementById('chatbot-body');
+      chatbotBody.innerHTML = `
+        <div class="chatbot-message bot">Selamat datang! Sila pilih soalan untuk maklumat lanjut:</div>
+        <div class="chatbot-options" id="chatbot-options">
+          <div class="chatbot-option" onclick="selectOption(1)">1. Apa kelebihan ID ini?</div>
+          <div class="chatbot-option" onclick="selectOption(2)">2. Kelajuan internet yang diperlukan berapa Mbps?</div>
+          <div class="chatbot-option" onclick="selectOption(3)">3. Channel apa saja yang ada?</div>
+          <div class="chatbot-option" onclick="selectOption(4)">4. Apa perbezaan setiap pakej yang ditawarkan?</div>
+          <div class="chatbot-option" onclick="selectOption(5)">5. Untuk pakej 2, 3, dan 4, adakah boleh login serentak?</div>
+          <div class="chatbot-option" onclick="selectOption(6)">6. Cara pembayaran bagaimana?</div>
+          <div class="chatbot-option" onclick="selectOption(7)">7. ID boleh bertahan berapa lama?</div>
+          <div class="chatbot-option" onclick="selectOption(8)">8. Berapa lama proses untuk mendapatkan ID?</div>
+          <div class="chatbot-option" onclick="selectOption(9)">9. Cara memasukkan ID ke aplikasi OTT?</div>
+          <div class="chatbot-option" onclick="selectOption(10)">10. Jika channel tidak boleh dibuka, apa yang perlu dilakukan?</div>
+        </div>
+      `;
+      chatbotBody.scrollTop = 0; // Scroll to top
+      clearTimeout(resetTimeout); // Clear any existing timeout
     }
 
     function selectOption(option) {
       const chatbotBody = document.getElementById('chatbot-body');
       const data = chatbotData[option];
+
+      // Clear current content
+      chatbotBody.innerHTML = '';
 
       // Add user question
       const userMessage = document.createElement('div');
@@ -839,16 +868,9 @@
       // Scroll to bottom
       chatbotBody.scrollTop = chatbotBody.scrollHeight;
 
-      // Refresh options
-      const optionsContainer = document.getElementById('chatbot-options');
-      optionsContainer.innerHTML = '';
-      Object.keys(chatbotData).forEach(key => {
-        const optionElement = document.createElement('div');
-        optionElement.className = 'chatbot-option';
-        optionElement.innerText = `${key}. ${chatbotData[key].question}`;
-        optionElement.onclick = () => selectOption(key);
-        optionsContainer.appendChild(optionElement);
-      });
+      // Set timeout to reset chatbot after 7 seconds
+      clearTimeout(resetTimeout);
+      resetTimeout = setTimeout(resetChatbot, 7000);
     }
   </script>
 </body>
