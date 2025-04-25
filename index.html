@@ -77,9 +77,26 @@
 
     .hero {
       background: url('hero-bg.jpg') no-repeat center center/cover;
+      position: relative;
       padding: 80px 20px;
       color: white;
       text-align: center;
+    }
+
+    /* Adding overlay to the hero section */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* Dark overlay for better text contrast */
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1; /* Ensures text appears above the overlay */
     }
 
     .hero-content h1 {
@@ -162,6 +179,25 @@
     .footer p {
       margin-top: 20px;
       font-size: 14px;
+    }
+
+    /* Language Switcher Styling */
+    .language-switcher {
+      margin-top: 10px;
+    }
+
+    .language-switcher button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .language-switcher button:hover {
+      background-color: #2980b9;
     }
   </style>
 </head>
@@ -283,16 +319,16 @@
         },
         'en': {
           'hero-title': 'Enjoy Unlimited Access to the Best OTT Platforms',
-          'hero-description': 'With ID OTT Navigator Lifetime, enjoy an unlimited streaming experience!',
+          'hero-description': 'With ID OTT Navigator Lifetime, enjoy endless streaming experiences!',
           'cta-text': 'Get Now',
           'cta-text-hero': 'Buy Now',
           'features-title': 'Why Choose ID OTT Navigator?',
           'feature-1-title': 'Lifetime Access',
           'feature-1-description': 'Enjoy unlimited access to top OTT platforms.',
           'feature-2-title': 'Easy to Use',
-          'feature-2-description': 'User-friendly interface for all audiences.',
+          'feature-2-description': 'User-friendly interface.',
           'feature-3-title': 'Regular Updates',
-          'feature-3-description': 'Always updated to ensure you stay current.',
+          'feature-3-description': 'Always updated to keep you up to date.',
           'feature-4-title': '24/7 Support',
           'feature-4-description': 'Our team is always ready to help.',
           'testimonials-title': 'What Our Users Say?',
