@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ID OTT Navigator Lifetime - Akses tak terbatas ke pelbagai platform OTT terbaik dengan harga berpatutan.">
   <title>ID OTT Navigator Lifetime</title>
+  <script src="https://js.stripe.com/v3/"></script>
   <style>
     /* Reset margin and padding */
     * {
@@ -320,6 +321,25 @@
       border-radius: 10px;
       margin: 0 10px;
     }
+
+    /* FPX Payment Styling */
+    .payment-method {
+      margin-bottom: 15px;
+    }
+
+    .payment-method label {
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .payment-method select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -425,25 +445,25 @@
       <h3>Pakej 1</h3>
       <p>1 ID, 1 Peranti</p>
       <div class="price">RM 10.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 1')" id="cta-text-package1">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 1', 1000)" id="cta-text-package1">Beli Sekarang</button>
     </div>
     <div class="package-item">
       <h3>Pakej 2</h3>
       <p>1 ID, 2 Peranti (Serentak)</p>
       <div class="price">RM 20.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 2')" id="cta-text-package2">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 2', 2000)" id="cta-text-package2">Beli Sekarang</button>
     </div>
     <div class="package-item">
       <h3>Pakej 3</h3>
       <p>1 ID, 3 Peranti (Serentak)</p>
       <div class="price">RM 30.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 3')" id="cta-text-package3">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 3', 3000)" id="cta-text-package3">Beli Sekarang</button>
     </div>
     <div class="package-item">
       <h3>Pakej 4</h3>
       <p>1 ID, 4 Peranti (Serentak)</p>
       <div class="price">RM 38.00</div>
-      <button class="cta" onclick="openBookingForm('Pakej 4')" id="cta-text-package4">Beli Sekarang</button>
+      <button class="cta" onclick="openBookingForm('Pakej 4', 3800)" id="cta-text-package4">Beli Sekarang</button>
     </div>
   </section>
 
@@ -467,6 +487,14 @@
           <option value="Pakej 4">Pakej 4 - 1 ID, 4 Peranti (RM 38.00)</option>
         </select>
         
+        <div class="payment-method">
+          <label for="payment-method" id="payment-method-label">Kaedah Pembayaran</label>
+          <select id="payment-method" name="payment-method" required>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="fpx">FPX (Online Banking)</option>
+          </select>
+        </div>
+        
         <button type="submit" id="submit-booking">Hantar Tempahan</button>
       </form>
     </div>
@@ -485,6 +513,9 @@
   </footer>
 
   <script>
+    // Initialize Stripe with your publishable key
+    const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'); // Replace with your actual Stripe publishable key
+
     // Function to smoothly scroll to a section
     function scrollToSection(sectionId) {
       const section = document.querySelector(sectionId);
@@ -495,57 +526,91 @@
     }
 
     // Function to open booking form modal
-    function openBookingForm(packageName) {
+    function openBookingForm(packageName, amount) {
       const modal = document.getElementById('booking-modal');
       const packageSelect = document.getElementById('package');
       packageSelect.value = packageName;
+      // Store amount in a data attribute for later use
+      document.getElementById('booking-form').dataset.amount = amount;
       modal.style.display = 'flex';
     }
 
     // Function to close booking form modal
     function closeBookingForm() {
-      const genus = document.getElementById('booking-modal');
+      const modal = document.getElementById('booking-modal');
       modal.style.display = 'none';
       document.getElementById('booking-form').reset();
     }
 
     // Function to handle form submission
-    function submitBookingForm(event) {
+    async function submitBookingForm(event) {
       event.preventDefault();
       const fullName = document.getElementById('full-name').value;
       const email = document.getElementById('email').value;
       const package = document.getElementById('package').value;
+      const paymentMethod = document.getElementById('payment-method').value;
+      const amount = parseInt(document.getElementById('booking-form').dataset.amount);
       const currentLang = document.querySelector('.language-switcher button[style*="background-color: #2980b9"]')?.innerText === 'English' ? 'en' : 'ms';
 
-      // Define message templates based on language
-      const messageTemplates = {
-        ms: {
-          header: 'Tempahan Baru:',
-          fullName: 'Nama Penuh: ',
-          email: 'E-mel: ',
-          package: 'Pakej: '
-        },
-        en: {
-          header: 'New Booking:',
-          fullName: 'Full Name: ',
-          email: 'Email: ',
-          package: 'Package: '
+      if (paymentMethod === 'fpx') {
+        // Handle FPX payment with Stripe
+        try {
+          // Create a Stripe Checkout Session
+          const response = await fetch('/create-checkout-session', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              package: package,
+              amount: amount, // Amount in smallest currency unit (sen)
+              email: email,
+              fullName: fullName,
+              success_url: window.location.origin + '/success.html',
+              cancel_url: window.location.origin + '/cancel.html',
+            }),
+          });
+
+          const session = await response.json();
+
+          // Redirect to Stripe Checkout
+          const { error } = await stripe.redirectToCheckout({
+            sessionId: session.id,
+          });
+
+          if (error) {
+            console.error('Stripe Checkout error:', error.message);
+            alert('Ralat semasa memproses pembayaran FPX. Sila cuba lagi.');
+          }
+        } catch (error) {
+          console.error('Error creating checkout session:', error);
+          alert('Ralat semasa memproses pembayaran FPX. Sila cuba lagi.');
         }
-      };
+      } else {
+        // Existing WhatsApp payment flow
+        const messageTemplates = {
+          ms: {
+            header: 'Tempahan Baru:',
+            fullName: 'Nama Penuh: ',
+            email: 'E-mel: ',
+            package: 'Pakej: '
+          },
+          en: {
+            header: 'New Booking:',
+            fullName: 'Full Name: ',
+            email: 'Email: ',
+            package: 'Package: '
+          }
+        };
 
-      // Select the appropriate template
-      const template = messageTemplates[currentLang];
+        const template = messageTemplates[currentLang];
+        const message = `${template.header}\n${template.fullName}${fullName}\n${template.email}${email}\n${template.package}${package}`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/601136237443?text=${encodedMessage}`;
 
-      // Construct the WhatsApp message
-      const message = `${template.header}\n${template.fullName}${fullName}\n${template.email}${email}\n${template.package}${package}`;
-      const encodedMessage = encodeURIComponent(message);
-      const whatsappUrl = `https://wa.me/601136237443?text=${encodedMessage}`;
-
-      // Redirect to WhatsApp
-      window.open(whatsappUrl, '_blank');
-
-      // Close the modal
-      closeBookingForm();
+        window.open(whatsappUrl, '_blank');
+        closeBookingForm();
+      }
     }
 
     // Function to change language
@@ -585,6 +650,7 @@
           'full-name-label': 'Nama Penuh',
           'email-label': 'E-mel',
           'package-label': 'Pakej',
+          'payment-method-label': 'Kaedah Pembayaran',
           'submit-booking': 'Hantar Tempahan'
         },
         'en': {
@@ -621,6 +687,7 @@
           'full-name-label': 'Full Name',
           'email-label': 'Email',
           'package-label': 'Package',
+          'payment-method-label': 'Payment Method',
           'submit-booking': 'Submit Booking'
         }
       };
