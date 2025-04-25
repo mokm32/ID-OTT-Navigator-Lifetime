@@ -145,13 +145,12 @@
       margin-bottom: 20px;
     }
 
-    .testimonial {
-      margin-bottom: 20px;
-    }
-
-    .testimonial p {
-      font-size: 18px;
-      color: #555;
+    .arrow-down {
+      display: block;
+      margin: 30px auto;
+      font-size: 36px;
+      color: #333;
+      text-align: center;
     }
 
     .packages {
@@ -374,14 +373,7 @@
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
     <h2 id="testimonials-title">Apa Kata Pengguna Kami?</h2>
-    <div class="testimonial">
-      <p>"ID OTT Navigator mengubah cara saya menikmati kandungan! Sangat mudah digunakan dan aksesnya luar biasa!"</p>
-      <p><strong>Andi, Kuala Lumpur</strong></p>
-    </div>
-    <div class="testimonial">
-      <p>"Harga yang berpatutan untuk akses seumur hidup, sangat berpuas hati!"</p>
-      <p><strong>Siti, Johor Bahru</strong></p>
-    </div>
+    <div class="arrow-down">↓</div>
     <!-- Carousel Section -->
     <div class="carousel-container">
       <div class="carousel">
@@ -512,7 +504,7 @@
 
     // Function to close booking form modal
     function closeBookingForm() {
-      const modal = document.getElementById('booking-modal');
+      const genus = document.getElementById('booking-modal');
       modal.style.display = 'none';
       document.getElementById('booking-form').reset();
     }
